@@ -15,6 +15,10 @@ public class Crew {
     }
 
     public boolean isSameCourse(Course course) {
-        return this.course == course;
+        return this.course.equals(course);
+    }
+
+    public String getName() {
+        return name;
     }
 }

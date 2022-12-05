@@ -7,6 +7,7 @@ import java.util.Set;
 
 public class Pair {
 
+    private static final String DELIMITER = " : ";
     private final String name;
     private final String otherName;
 
@@ -29,5 +30,14 @@ public class Pair {
     @Override
     public int hashCode() {
         return Objects.hash(name, otherName) + Objects.hash(otherName, name);
+    }
+
+    public String toString(Pair pair) {
+        return toString() + DELIMITER + pair.name;
+    }
+
+    @Override
+    public String toString() {
+        return name + DELIMITER + otherName;
     }
 }

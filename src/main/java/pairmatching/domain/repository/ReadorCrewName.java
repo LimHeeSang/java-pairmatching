@@ -19,17 +19,18 @@ public class ReadorCrewName {
 
     public static List<Crew> readCrew() throws FileNotFoundException {
         List<Crew> crews = new ArrayList<>();
-        addCrewsFromFile(crews, FILE_PATH_FRONTEND_CREW);
-        addCrewsFromFile(crews, FILE_PATH_BACKEND_CREW);
+        crews.addAll(addCrewsFromFile(FILE_PATH_FRONTEND_CREW, Course.FRONTEND));
+        crews.addAll(addCrewsFromFile(FILE_PATH_BACKEND_CREW, Course.BACKEND));
         return crews;
     }
 
-    private static void addCrewsFromFile(List<Crew> crews, String fileName) throws FileNotFoundException {
+    private static List<Crew> addCrewsFromFile(String fileName, Course course) throws FileNotFoundException {
         Scanner scanner = new Scanner(new File(fileName));
+        List<Crew> crews = new ArrayList<>();
         while (scanner.hasNext()) {
             String name = scanner.next();
-            System.out.println(name);
-            crews.add(new Crew(name, Course.FRONTEND));
+            crews.add(new Crew(name, course));
         }
+        return crews;
     }
 }
