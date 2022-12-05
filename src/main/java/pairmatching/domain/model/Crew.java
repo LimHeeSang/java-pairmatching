@@ -10,7 +10,7 @@ public class Crew {
         this.course = course;
     }
 
-    public boolean isSame(String name) {
+    public boolean isSameName(String name) {
         return this.name.equals(name);
     }
 }
