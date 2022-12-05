@@ -14,6 +14,10 @@ public class PairKey {
         this.mission = mission;
     }
 
+    public boolean isEqualLevel(Level level) {
+        return this.level == level;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

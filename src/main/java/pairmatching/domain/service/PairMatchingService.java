@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 
 public class PairMatchingService {
 
+    private static final String ERROR_OVER_TRY_MESSAGE = "[ERROR] 매칭 시도가 3회를 초과했습니다.";
+    private static final int CRITERION_TRY_COUNT = 3;
     private final CrewRepository crewRepository;
     private final PairRepository pairRepository;
     private final ShuffleStrategy shuffleStrategy;
@@ -28,10 +30,38 @@ public class PairMatchingService {
         List<Crew> crews = crewRepository.findAllByCourse(course);
         List<String> crewsName = crews.stream().map(Crew::getName).collect(Collectors.toList());
 
-        shuffleStrategy.shuffle(crewsName);
-        List<Pair> pairs = PairMatchMachine.match(crewsName);
-
+        List<Pair> pairs = createPair(crewsName, level);
         pairRepository.save(new PairKey(course, level, mission), pairs);
+    }
+
+    private List<Pair> createPair(List<String> crewsName, Level level) {
+        List<List<Pair>> missionPairs = pairRepository.findAllByLevel(level);
+        return tryCreatePairs(crewsName, missionPairs);
+    }
+
+    private List<Pair> tryCreatePairs(List<String> crewsName, List<List<Pair>> missionPairs) {
+        int count = 0;
+        while (count < CRITERION_TRY_COUNT) {
+            List<Pair> createPair = createShufflePairs(crewsName);
+            if (!checkDuplicate(missionPairs, createPair)) {
+                return createPair;
+            }
+            count++;
+        }
+        throw new IllegalStateException(ERROR_OVER_TRY_MESSAGE);
+    }
+
+    private List<Pair> createShufflePairs(List<String> crewsName) {
+        return PairMatchMachine.match(shuffleStrategy.shuffle(crewsName));
+    }
+
+    private boolean checkDuplicate(List<List<Pair>> missionPairs, List<Pair> createPair) {
+        for (List<Pair> missionPair : missionPairs) {
+            if (PairMatchMachine.isDuplicate(createPair, missionPair)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public List<String> getPair(Course course, Level level, Mission mission) {

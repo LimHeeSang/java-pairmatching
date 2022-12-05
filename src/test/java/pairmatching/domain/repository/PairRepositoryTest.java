@@ -35,4 +35,20 @@ class PairRepositoryTest {
         assertThat(findPairs.size()).isEqualTo(findPairs.size());
         assertThat(findPairs).containsExactly(pair, otherPair);
     }
+
+    @Test
+    void 미션별_페어정보_조회() {
+        PairKey pairKey = new PairKey(Course.BACKEND, Level.LEVEL1, Mission.BASEBALL_GAME);
+        PairKey pairKey2 = new PairKey(Course.BACKEND, Level.LEVEL1, Mission.LOTTO);
+
+        Pair pair = new Pair("a", "b");
+        Pair otherPair = new Pair("c", "d");
+        List<Pair> pairs = Arrays.asList(pair, otherPair);
+
+        pairRepository.save(pairKey, pairs);
+        pairRepository.save(pairKey2, pairs);
+
+        List<List<Pair>> levelPairs = pairRepository.findAllByLevel(Level.LEVEL1);
+        assertThat(levelPairs.size()).isEqualTo(2);
+    }
 }
