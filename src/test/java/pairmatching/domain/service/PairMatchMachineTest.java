@@ -36,4 +36,12 @@ class PairMatchMachineTest {
                 new Pair("jundle", "heesang")
                 );
     }
+
+    @Test
+    void 두페어정보중_같은페어가_있는지_체크() {
+        List<Pair> pairs = Arrays.asList(new Pair("pobi", "jason"), new Pair("handa", "bibi"));
+        List<Pair> otherPairs = Arrays.asList(new Pair("bibi", "handa"), new Pair("a", "b"));
+        boolean result = PairMatchMachine.isDuplicate(pairs, otherPairs);
+        assertThat(result).isTrue();
+    }
 }

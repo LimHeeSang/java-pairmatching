@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 
 public class PairMatchMachine {
 
+    private static final boolean DEFAULT_PAIR_DUPLICATE = false;
+
     public static List<Pair> match(List<String> names) {
         if (isEven(names.size())) {
             return createEvenPairs(names);
@@ -39,28 +41,34 @@ public class PairMatchMachine {
 
     public static List<String> mapToString(List<Pair> pairs) {
         if (isEven(pairs.size())) {
-            return pairs.stream()
-                    .map(Pair::toString)
-                    .collect(Collectors.toList());
+            return mapToEvenString(pairs);
         }
-        return extracted(pairs);
+        return mapToOddString(pairs);
     }
 
-    private static List<String> extracted(List<Pair> pairs) {
+    private static List<String> mapToEvenString(List<Pair> pairs) {
+        return pairs.stream()
+                .map(Pair::toString)
+                .collect(Collectors.toList());
+    }
+
+    private static List<String> mapToOddString(List<Pair> pairs) {
         List<String> result = new ArrayList<>();
-        System.out.println(pairs.size() - 3);
         for (int i = 0; i < pairs.size() - 3; i++) {
             result.add(pairs.get(i).toString());
         }
-        Pair lastPair = pairs.get(pairs.size() - 3);
-        Pair pair = pairs.get(pairs.size() - 2);
-        result.add(lastPair.toString(pair));
+        Pair pair = pairs.get(pairs.size() - 3);
+        Pair otherPair = pairs.get(pairs.size() - 2);
+        result.add(pair.toString(otherPair));
         return result;
     }
 
-    //리사 : 덴버 : 제키
-
-    //리사 : 덴버
-    //제키 : 덴버
-    //제키 : 리사 => 리사 : 덴버 : 제키
+    public static boolean isDuplicate(List<Pair> pairs, List<Pair> otherPairs) {
+        for (Pair pair : pairs) {
+            if (otherPairs.contains(pair)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
