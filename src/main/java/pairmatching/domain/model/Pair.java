@@ -28,6 +28,6 @@ public class Pair {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, otherName);
+        return Objects.hash(name, otherName) + Objects.hash(otherName, name);
     }
 }
