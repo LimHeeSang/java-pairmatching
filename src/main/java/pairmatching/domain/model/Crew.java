@@ -13,4 +13,8 @@ public class Crew {
     public boolean isSameName(String name) {
         return this.name.equals(name);
     }
+
+    public boolean isSameCourse(Course course) {
+        return this.course == course;
+    }
 }

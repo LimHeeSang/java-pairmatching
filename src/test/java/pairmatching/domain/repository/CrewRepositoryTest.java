@@ -8,6 +8,7 @@ import pairmatching.domain.model.Course;
 import pairmatching.domain.model.Crew;
 
 import java.io.FileNotFoundException;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -35,5 +36,14 @@ class CrewRepositoryTest {
     void 파일에있는_크루들을_저장(String name) {
         Crew crew = crewRepository.findByName(name);
         assertThat(crew.isSameName(name)).isTrue();
+    }
+
+    @ValueSource(strings = {"FRONTEND", "BACKEND"})
+    @ParameterizedTest
+    void 코스별로_크루들을_조회(String name) {
+        List<Crew> crews = crewRepository.findAllByCourse(Course.valueOf(name));
+        for (Crew crew : crews) {
+            assertThat(crew.isSameCourse(Course.valueOf(name))).isTrue();
+        }
     }
 }
