@@ -13,12 +13,24 @@ public enum Level {
     LEVEL5("레벨5", Collections.emptyList());
 
     private static final String ERROR_INVALID_MISSION = "[ERROR] 해당 레벨에 없는 미션입니다.";
+    private static final String ERROR_INVALID_LEVEL_INPUT = "[ERROR] 없는 레벨입니다.";
     private final String name;
     private final List<Mission> missions;
 
     Level(String name, List<Mission> missions) {
         this.name = name;
         this.missions = missions;
+    }
+
+    public static Level from(String name) {
+        return Arrays.stream(Level.values())
+                .filter(level -> level.isEqualName(name))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(ERROR_INVALID_LEVEL_INPUT));
+    }
+
+    private boolean isEqualName(String name) {
+        return this.name.equals(name);
     }
 
     public void validateMission(Mission mission) {
