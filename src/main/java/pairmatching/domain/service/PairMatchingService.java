@@ -27,6 +27,7 @@ public class PairMatchingService {
     }
 
     public void pairMatch(Course course, Level level, Mission mission) {
+        level.validateMission(mission);
         List<Crew> crews = crewRepository.findAllByCourse(course);
         List<String> crewsName = crews.stream().map(Crew::getName).collect(Collectors.toList());
 

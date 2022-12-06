@@ -8,8 +8,6 @@ import java.util.stream.Collectors;
 
 public class PairMatchMachine {
 
-    private static final boolean DEFAULT_PAIR_DUPLICATE = false;
-
     public static List<Pair> match(List<String> names) {
         if (isEven(names.size())) {
             return createEvenPairs(names);
