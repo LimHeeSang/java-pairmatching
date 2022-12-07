@@ -1,13 +1,13 @@
 package pairmatching;
 
+import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+
 import static camp.nextstep.edu.missionutils.test.Assertions.assertShuffleTest;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
-
-import camp.nextstep.edu.missionutils.test.NsTest;
-import java.util.Arrays;
-import org.junit.jupiter.api.Test;
-import pairmatching.Application;
 
 class ApplicationTest extends NsTest {
 

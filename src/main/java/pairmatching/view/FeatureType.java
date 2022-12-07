@@ -1,19 +1,28 @@
 package pairmatching.view;
 
+import pairmatching.controller.Feature;
+import pairmatching.controller.PairGetFeature;
+import pairmatching.controller.PairInitFeature;
+import pairmatching.controller.PairMatchFeature;
+import pairmatching.controller.QuitFeature;
+import pairmatching.domain.service.PairMatchingService;
+
 import java.util.Arrays;
 
 public enum FeatureType {
 
-    PAIR_MATCH("1"),
-    PAIR_GET("2"),
-    PAIR_INIT("3"),
-    QUIT("Q");
+    PAIR_MATCH("1", new PairMatchFeature()),
+    PAIR_GET("2", new PairGetFeature()),
+    PAIR_INIT("3",new PairInitFeature()),
+    QUIT("Q", new QuitFeature());
 
     private static final String ERROR_INVALID_FEATURE_INPUT = "[ERROR] 1, 2, 3, Q 중 입력 가능합니다.";
     private final String command;
+    private final Feature feature;
 
-    FeatureType(String command) {
+    FeatureType(String command, Feature feature) {
         this.command = command;
+        this.feature = feature;
     }
 
     public static FeatureType from(String command) {
@@ -27,16 +36,8 @@ public enum FeatureType {
         return this.command.equals(command);
     }
 
-    public boolean isPairMatch() {
-        return this == PAIR_MATCH;
-    }
-
-    public boolean isPairGet() {
-        return this == PAIR_GET;
-    }
-
-    public boolean isPairInit() {
-        return this == PAIR_INIT;
+    public void operate(PairMatchingService pairMatchingService) {
+        feature.operate(pairMatchingService);
     }
 
     public boolean isQuit() {

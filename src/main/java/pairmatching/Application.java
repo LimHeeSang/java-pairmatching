@@ -9,9 +9,13 @@ import pairmatching.domain.service.RandomShuffleStrategy;
 import java.io.FileNotFoundException;
 
 public class Application {
-    public static void main(String[] args) throws FileNotFoundException {
-        PairMatchingController controller = new PairMatchingController(pairMatchingService());
-        controller.run();
+    public static void main(String[] args) {
+        try {
+            PairMatchingController controller = new PairMatchingController(pairMatchingService());
+            controller.run();
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        }
     }
 
     private static PairMatchingService pairMatchingService() throws FileNotFoundException {
