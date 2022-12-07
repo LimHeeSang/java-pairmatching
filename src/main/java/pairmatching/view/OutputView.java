@@ -4,6 +4,8 @@ import pairmatching.domain.model.Course;
 import pairmatching.domain.model.Level;
 import pairmatching.domain.model.Mission;
 
+import java.util.List;
+
 public class OutputView {
 
     private static final String COURSE_NAME = "과정: ";
@@ -61,5 +63,11 @@ public class OutputView {
         }
         sb.append("\n");
         return sb;
+    }
+
+    public static void printPairMatchingResult(List<String> pairMatchResult) {
+        for (String pair : pairMatchResult) {
+            System.out.println(pair);
+        }
     }
 }
