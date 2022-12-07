@@ -37,7 +37,12 @@ public enum FeatureType {
     }
 
     public void operate(PairMatchingService pairMatchingService) {
-        feature.operate(pairMatchingService);
+        try {
+            feature.operate(pairMatchingService);
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            System.out.println(e.getMessage());
+            operate(pairMatchingService);
+        }
     }
 
     public boolean isQuit() {

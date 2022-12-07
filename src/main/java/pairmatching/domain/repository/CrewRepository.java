@@ -12,7 +12,7 @@ public class CrewRepository {
     private final List<Crew> crews;
 
     public CrewRepository() throws FileNotFoundException {
-        this.crews =  ReadorCrewName.readCrew();
+        this.crews = ReadorCrewName.readCrew();
     }
 
     public void save(Crew crew) {

@@ -13,7 +13,7 @@ public class PairMatchFeature implements Feature {
 
     @Override
     public void operate(PairMatchingService pairMatchingService) {
-        CourseLevelMissionDto dto = InputView.inputCourseLevelMission();
+        CourseLevelMissionDto dto = InputView.inputMethod(InputView::inputCourseLevelMission);
         if (pairMatchingService.existMatchingResult(dto.getCourse(), dto.getLevel(), dto.getMission())) {
             checkRematch(pairMatchingService, dto);
             return;
@@ -22,7 +22,7 @@ public class PairMatchFeature implements Feature {
     }
 
     private void checkRematch(PairMatchingService pairMatchingService, CourseLevelMissionDto dto) {
-        ReMatchType rematch = InputView.inputRematch();
+        ReMatchType rematch = InputView.inputMethod(InputView::inputRematch);
         if (rematch.isYes()) {
             pairMatch(pairMatchingService, dto);
         }

@@ -15,7 +15,7 @@ public class PairMatchingController {
     public void run() {
         FeatureType feature;
         do {
-            feature = InputView.inputFeature();
+            feature = InputView.inputMethod(InputView::inputFeature);
             feature.operate(pairMatchingService);
         } while (!feature.isQuit());
     }

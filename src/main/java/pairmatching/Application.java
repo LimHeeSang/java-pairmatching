@@ -14,7 +14,7 @@ public class Application {
             PairMatchingController controller = new PairMatchingController(pairMatchingService());
             controller.run();
         } catch (FileNotFoundException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
