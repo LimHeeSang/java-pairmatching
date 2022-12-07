@@ -24,4 +24,12 @@ public enum ReMatchType {
     private boolean isEqualCommand(String name) {
         return this.name.equals(name);
     }
+
+    public boolean isYes() {
+        return this == YES;
+    }
+
+    public boolean isNo() {
+        return this == NO;
+    }
 }

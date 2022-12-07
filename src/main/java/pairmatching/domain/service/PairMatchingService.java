@@ -26,6 +26,11 @@ public class PairMatchingService {
         this.shuffleStrategy = shuffleStrategy;
     }
 
+    public boolean existMatchingResult(Course course, Level level, Mission mission) {
+        level.validateMission(mission);
+        return pairRepository.existPairByKey(new PairKey(course, level, mission));
+    }
+
     public void pairMatch(Course course, Level level, Mission mission) {
         level.validateMission(mission);
         List<Crew> crews = crewRepository.findAllByCourse(course);
@@ -68,5 +73,9 @@ public class PairMatchingService {
     public List<String> getPair(Course course, Level level, Mission mission) {
         List<Pair> pairs = pairRepository.findByKey(new PairKey(course, level, mission));
         return PairMatchMachine.mapToString(pairs);
+    }
+
+    public void initPair() {
+        pairRepository.clear();
     }
 }

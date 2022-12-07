@@ -26,4 +26,20 @@ public enum FeatureType {
     private boolean isEqualCommand(String command) {
         return this.command.equals(command);
     }
+
+    public boolean isPairMatch() {
+        return this == PAIR_MATCH;
+    }
+
+    public boolean isPairGet() {
+        return this == PAIR_GET;
+    }
+
+    public boolean isPairInit() {
+        return this == PAIR_INIT;
+    }
+
+    public boolean isQuit() {
+        return this == QUIT;
+    }
 }

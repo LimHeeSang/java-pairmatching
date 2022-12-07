@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 public class PairRepository {
 
+    private static final String ERROR_NOT_EXIST_MATCH_RESULT = "[ERROR] 해당 매칭 정보가 없습니다.";
     private final Map<PairKey, List<Pair>> pairs;
 
     public PairRepository() {
@@ -22,6 +23,9 @@ public class PairRepository {
     }
 
     public List<Pair> findByKey(PairKey pairKey) {
+        if (!existPairByKey(pairKey)) {
+            throw new IllegalArgumentException(ERROR_NOT_EXIST_MATCH_RESULT);
+        }
         return pairs.get(pairKey);
     }
 
@@ -36,5 +40,13 @@ public class PairRepository {
         return pairs.keySet().stream()
                 .filter(pairKey -> pairKey.isEqualLevel(level))
                 .collect(Collectors.toList());
+    }
+
+    public boolean existPairByKey(PairKey pairKey) {
+        return pairs.containsKey(pairKey);
+    }
+
+    public void clear() {
+        pairs.clear();
     }
 }
