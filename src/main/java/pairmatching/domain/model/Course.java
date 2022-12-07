@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public enum Course {
 
-    FRONTEND("프론트엔드"), BACKEND("백엔드");
+    BACKEND("백엔드"), FRONTEND("프론트엔드");
 
     private static final String ERROR_INVALID_COURSE_INPUT = "[ERROR] 백엔드, 프론트엔드 중 입력 가능합니다.";
     private final String name;
@@ -22,5 +22,9 @@ public enum Course {
 
     private boolean isEqualName(String name) {
         return this.name.equals(name);
+    }
+
+    public String getName() {
+        return name;
     }
 }

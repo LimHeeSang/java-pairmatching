@@ -30,4 +30,8 @@ public enum Mission {
     private boolean isEqualName(String name) {
         return this.name.equals(name);
     }
+
+    public String getName() {
+        return name;
+    }
 }

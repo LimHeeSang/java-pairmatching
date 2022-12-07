@@ -1,6 +1,7 @@
 package pairmatching;
 
 import org.junit.jupiter.api.Test;
+import pairmatching.view.OutputView;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,5 +27,10 @@ public class LearningTest {
             String str = scanner.next();
             System.out.println(str);
         }
+    }
+
+    @Test
+    void printCourse() {
+        OutputView.printCourseMissionLevel();
     }
 }

@@ -38,4 +38,16 @@ public enum Level {
             throw new IllegalArgumentException(ERROR_INVALID_MISSION);
         }
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<Mission> getMissions() {
+        return missions;
+    }
+
+    public boolean isMissionsEmpty() {
+        return missions.size() == 0;
+    }
 }
