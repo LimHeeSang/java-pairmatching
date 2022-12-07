@@ -16,6 +16,7 @@ public class OutputView {
     private static final String LEVEL_START_PREFIX = ": ";
     private static final String SEPARATOR_MARK_LINE = "#############################################";
     private static final int NEW_LINE_SIZE = 1;
+    private static final String INIT_MESSAGE = "초기화 되었습니다.";
 
     private OutputView() {
     }
@@ -69,5 +70,9 @@ public class OutputView {
         for (String pair : pairMatchResult) {
             System.out.println(pair);
         }
+    }
+
+    public static void printInit() {
+        System.out.println(INIT_MESSAGE);
     }
 }
